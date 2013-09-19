@@ -1,0 +1,29 @@
+.hidden{
+	display: none;
+}
+form{
+	width: 960px;
+margin: auto;
+background-color: #ccc;
+}
+legend{
+	font-weight: bold;
+padding: 10px;
+}
+.coursewrapper,.quizwrapper,.groupwrapper{
+	margin-bottom: 20px;
+}
+.qselect{
+	height: 240px;
+width: 370px;
+}
+.stat {
+background: white;
+border: 1px solid gray;
+border-radius: 10px;
+padding: 10px;
+width: 470px;
+float: right;
+overflow-y: auto;
+height: 445px;
+}
