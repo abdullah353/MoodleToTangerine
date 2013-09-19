@@ -1,0 +1,3 @@
+-Added
+1) Auto grading enabled.
+2) Course list reset to default on Generate Assessments
