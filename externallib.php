@@ -12,7 +12,7 @@ class local_sam_external extends external_api {
         return new external_function_parameters(
                 array('welcomemessage' => new external_value(PARAM_TEXT, 'The welcome message. By default it is "Hello world,"', VALUE_DEFAULT, 'Hello world, '),
                   'grabquizid' => new external_value(PARAM_TEXT, 'Quiz id', VALUE_DEFAULT, ''),
-                  'grabgroup' => new external_value(PARAM_TEXT, 'Group Name', VALUE_DEFAULT, 'telfortest3'))
+                  'autoGrade' => new external_value(PARAM_TEXT, 'Group Name', VALUE_DEFAULT, 'telfortest3'))
         );
     }
 
@@ -20,13 +20,13 @@ class local_sam_external extends external_api {
      * Returns welcome message
      * @return string welcome message
      */
-    public static function hello_world($welcomemessage = 'Hello world, ',$grabquizid='',$grabgroup= 'telfortest3') {
+    public static function hello_world($welcomemessage = 'Hello world, ',$grabquizid='',$autoGrade= 'disable') {
         global $USER;
         global $CFG;
         global $DB; 
 
         $params = self::validate_parameters(self::hello_world_parameters(),
-        array('welcomemessage' => $welcomemessage,'grabquizid' => $grabquizid,'grabgroup'=>$grabgroup));
+        array('welcomemessage' => $welcomemessage,'grabquizid' => $grabquizid,'autoGrade'=>$autoGrade));
 $json = '';
 $json .= '{
   "docs": [
@@ -49,6 +49,7 @@ FETCHING CIURSE FIRST BASED ON ID OR NAME
     *********************/
 /*$courseid = 5;*/
 $courseid = $params['welcomemessage'];
+$autoGrade = $params['autoGrade'];
 $explicitQuizid = $params['grabquizid'];
 $convertingid = explode('#', $explicitQuizid);
 $coursename = '';
@@ -301,11 +302,23 @@ $coursename = '';
                       $label = str_replace($empattern, '', $label);
                       $label = preg_replace("/<xml>(.+?)<\/xml>/s", '', $label);
                       $label = preg_replace("/<style>(.+?)<\/style>/s", '', $label);
+                      if($autoGrade == 'enabled'){
+                        $json .= ' {
+                              "label" : "<div class=\'clearfix\' style=\'margin-right: 15px;\'>'.$label.'</div>",
+                              "value" : "'.intval($row2['fraction']).'"
+                            ';
+                      }else{
+                        $empattern = array('<!--[if gte mso 9]>','<!--[if gte mso 10]>','<![endif]-->');
+                        $ans = str_replace($empattern, '', $label);
+                        $ans = preg_replace("/<xml>(.+?)<\/xml>/s", '', $label);
+                        $ans = preg_replace("/<style>(.+?)<\/style>/s", '',$label);
+                        $ans = strip_tags($label);
+                        $json .= ' {
+                              "label" : "<div class=\'clearfix\' style=\'margin-right: 15px;\'>'.$label.'</div>",
+                              "value" : "'.$ans.'"
+                            ';
+                      }
 
-                      $json .= ' {
-                            "label" : "<div class=\'clearfix\'>'.$label.'</div>",
-                            "value" : "'.intval($row2['fraction']).'"
-                          ';
                     if ($count < $number)
                        {
                            $json .= '},';

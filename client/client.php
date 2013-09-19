@@ -32,8 +32,7 @@
             </select>
         </div>
         <div class="groupwrapper hidden">
-            <div>Type Group Name</div>
-            <input name="gname" value="telfortest3" placeholder="telfortest3">
+            <input type="checkbox" name="gname" value="enabled"><label>Auto Grading in Report <span style="font-size:12px;color:red;">By Checking will Turn On Auto grading</span></label>
         </div>
         <div class="cloudwrapper hidden">
             <label>Type url </label>

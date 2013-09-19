@@ -1,27 +1,8 @@
-Web service template plugin for Moodle 2.X (BETA VERSION)
---------------------------------------------------------
+Web service template plugin for Moodle 2.X
+------------------------------------------
 
 It is a webservice designed for moodle to export models Courses into Tangerine Platform.
 
-1) STEPS TO INSTALL:
-
-A) MANUALLY INSTALL PROCEDURE (RECOMMENDED)
-///////////
-// 1) - Unzip sam.zip and copy all files to local folder (Local Folder is located in the root of moodle Framework )
-// 2)- your folder Should look like this /local/sam/externallib.php
-
-
-B)FROM MOODLE ADMIN:
-///////////
-// 1)- Install Addon (Admin > Plugins > Install  Addons)
-// 2) Choose "Plugin type" = Local Plugin. Browse sam.zip Check mark the Acknowledgement Click on Install
-
-2) CONFIGURATION STEPS (REQUIRED)*:
-
-/// MOODLE ADMINISTRATION SETUP STEPS
-// 1- Enable web service advance feature (Admin > Advanced features)
-// 2- Enable XMLRPC protocol (Admin > Plugins > Web services > Manage protocols)
-// 3- Create a token for a specific user and for the service 'My service SAM' (Admin > Plugins > Web services > Manage tokens)
-// 4- Copy The Token and edit client.php from this location <yoursite>/local/sam/client/client.php 
-      Search For Word <YOUR TOKEN HERE> and replace it with actual token.( it should look like $token = '456easdfe3fr4f43t3e'; ).
-// 5- Run this script directly from your browser: <yoursite>/local/sam/client/client.php
+STEPS TO INSTALL:
+1- install the plugin in /local/sam/
+2- Read, setup and run /local/sam/client/client.php

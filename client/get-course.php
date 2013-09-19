@@ -13,7 +13,7 @@ if (mysqli_connect_errno($con))
 	while($coursefetch = mysqli_fetch_array($coursequery)){
 		if(isset($_POST['cid'])){
 			if($coursefetch['id'] == $_POST['cid']){
-				echo '<option value='.$coursefetch['id'].' selected>'.$coursefetch['fullname'].'</option>';
+				echo '<option value='.$coursefetch['id'].'>'.$coursefetch['fullname'].'</option>';
 			}else{
 	    		echo '<option value='.$coursefetch['id'].'>'.$coursefetch['fullname'].'</option>';	
 				
